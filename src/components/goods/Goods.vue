@@ -182,5 +182,49 @@ export default {
 .goods .foods-wrapper .food-list .food-item .content{
   flex: 1;
 }
+/* 具体内容样式 */ 
+.goods .foods-wrapper .food-list .food-item .content .name{
+  font-size: 16px;
+  line-height: 21px;
+  color: #333333;
+  margin-bottom: 10px;
+  padding-right: 27px;
+}
 
+.goods .foods-wrapper .food-list .food-item .content .desc{
+  font-size: 10px;
+  line-height: 19px;
+  color: #bfbfbf;
+  margin-bottom: 8px;
+  
+  /* 超出部分显示省略号*/
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.goods .foods-wrapper .food-list .food-item .content .extra{
+  font-size: 10px;
+  color: #BFBFBF;
+  margin-bottom: 7px;
+}
+.goods .foods-wrapper .food-list .food-item .content .extra .saled{
+  margin-right: 14px;
+}
+.goods .foods-wrapper .food-list .food-item .content .product{
+  height: 15px;
+  margin-bottom: 6px;
+}
+.goods .foods-wrapper .food-list .food-item .content .price{
+  font-size: 0;
+}
+.goods .foods-wrapper .food-list .food-item .content .price .text{
+  font-size: 14px;
+  color: #fb4e44;
+}
+.goods .foods-wrapper .food-list .food-item .content .price .unit{
+  font-size: 12px;
+  color: #BFBFBF;
+}
 </style>
