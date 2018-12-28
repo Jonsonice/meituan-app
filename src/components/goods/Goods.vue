@@ -74,7 +74,10 @@ export default {
     return{
       container:{},
       goods:[],
-      listHeight:[]
+      listHeight:[],
+      menuScroll:{},
+      foodScroll:{},
+      scrollY:0
     }
   },
   // 计算属性是不能够接收参数的
@@ -83,8 +86,17 @@ export default {
       return "background-image: url(" + imgName + ");"
     },
     initScroll(){
-      new BScroll(this.$refs.menuScroll)
-      new BScroll(this.$refs.foodScroll)
+      this.menuScroll = new BScroll(this.$refs.menuScroll)
+      this.foodScroll = new BScroll(this.$refs.foodScroll,{
+        probeType:3
+      })
+
+      // foodScroll 监听事件
+      this.foodScroll.on("scroll",(pos) => {
+        // console.log(pos.y)
+      this.scrollY = Math.abs(Math.round(pos.y))
+        console.log(this.scrollY)
+      })
     },
     calculateHeight(){
       // 获取元素
