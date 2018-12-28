@@ -6,7 +6,8 @@
         <!-- 专场 -->
         <li 
         class="menu-item"
-        :class="{'current':currentIndex === 0}">
+        :class="{'current':currentIndex === 0}"
+        @click="selectMenu(0)">
           <p class="text">
             <img class="icon" :src="container.tag_icon" v-if="container.tag_icon">
             {{container.tag_name}}
@@ -16,7 +17,8 @@
         <li 
             class="menu-item"
             v-for="(item,index) in goods" :key="index"
-            :class="{'current':currentIndex === index + 1}">
+            :class="{'current':currentIndex === index + 1}"
+            @click="selectMenu(index+1)">
           <p class="text">
             <img class="icon" :src="item.icon" v-if="item.icon">
             {{item.name}}
@@ -116,6 +118,14 @@ export default {
       }
       // console.log(this.listHeight)
     },
+    selectMenu(index){
+      // console.log(index)
+      let foodlist = this.$refs.foodScroll.getElementsByClassName("food-list-hook")
+      let element = foodlist[index]
+      // console.log(element)
+      // 滚动到对应元素的位置
+      this.foodScroll.scrollToElement(element,250)
+    }
   },
   created() {
     fetch('/api/goods')
@@ -149,7 +159,7 @@ export default {
 
         // 是否在上述区间中
         if(!height2 || (this.scrollY >= height1 && this.scrollY < height2)){
-          console.log(i)
+          // console.log(i)
           return i;
         }
       }
