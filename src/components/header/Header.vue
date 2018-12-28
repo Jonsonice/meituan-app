@@ -53,35 +53,37 @@
     </div>
    <!-- 背景内容 结束 -->
    <!-- 公告详情 开始 -->
-    <div class="bulletin-detail" v-show="isShow">
-      <div class="detail-wrapper">
-        <!-- 相关内容容器 -->
-        <div class="main-wrapper" :style="detail_bg">
-          <div class="icon" :style="head_bg"></div>
-          <h3 class="name">{{poiInfo.name}}</h3>
-          <!-- 星级评价 -->
+    <transition name="bulletin-detail">
+      <div class="bulletin-detail" v-show="isShow">
+        <div class="detail-wrapper">
+          <!-- 相关内容容器 -->
+          <div class="main-wrapper" :style="detail_bg">
+            <div class="icon" :style="head_bg"></div>
+            <h3 class="name">{{poiInfo.name}}</h3>
+            <!-- 星级评价 -->
 
-          <p class="tip">
-                {{poiInfo.min_price_tip}} <i>|</i> {{poiInfo.shipping_fee_tip}} <i>|</i> {{poiInfo.delivery_time_tip}}
-          </p>
-
-          <p class="time">
-            配送时间: {{poiInfo.shipping_time}}
-          </p>
-
-          <div class="discounts" v-if="poiInfo.discounts2">
-            <p>
-              <img :src="poiInfo.discounts2[0].icon_url" />
-              <span>{{poiInfo.discounts2[0].info}}</span>
+            <p class="tip">
+                  {{poiInfo.min_price_tip}} <i>|</i> {{poiInfo.shipping_fee_tip}} <i>|</i> {{poiInfo.delivery_time_tip}}
             </p>
+
+            <p class="time">
+              配送时间: {{poiInfo.shipping_time}}
+            </p>
+
+            <div class="discounts" v-if="poiInfo.discounts2">
+              <p>
+                <img :src="poiInfo.discounts2[0].icon_url" />
+                <span>{{poiInfo.discounts2[0].info}}</span>
+              </p>
+            </div>
+          </div>
+          <!-- 关闭内容容器 -->
+          <div class="close-wrapper">
+            <span class="icon-close" @click="closeBulletin"></span>
           </div>
         </div>
-        <!-- 关闭内容容器 -->
-        <div class="close-wrapper">
-          <span class="icon-close" @click="closeBulletin"></span>
-        </div>
       </div>
-    </div>
+    </transition>
    <!-- 公告详情 结束 -->
   </div>
 </template>
@@ -420,5 +422,21 @@ export default {
   display: inline-block;
   background: rgba(118, 118, 118, 0.7);
   border: 1px solid rgba(140, 140, 140, 0.9);
+}
+
+/* 动画效果 */ 
+.bulletin-detail-enter-active,
+.bulletin-detail-leave-active {
+  transition: 2s all;
+}
+
+.bulletin-detail-enter,
+.bulletin-detail-leave-to {
+  opacity: 0;
+}
+
+.bulletin-detail-enter-to,
+.bulletin-detail-leave {
+  opacity: 1;
 }
 </style>
