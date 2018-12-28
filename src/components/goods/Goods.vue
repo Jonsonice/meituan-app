@@ -25,7 +25,18 @@
     </div>
     <!-- 商品列表 -->
     <div class="foods-wrapper">
-      
+      <ul>
+        <!-- 专场 -->
+        <li class="container-list">
+          <div v-for="(item,index) in container.operation_source_list" :key="index">
+            <img :src="item.pic_url">
+          </div>
+        </li>
+        <!-- 具体分类 -->
+        <li v-for="(item,index) in goods" :key="index" class="food-list">
+          <h3 class="title">{{item.name}}</h3>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
