@@ -24,22 +24,31 @@
 
    <!-- 顶部通栏 结束 -->
    <!-- 主题内容 开始 -->
-    
-
-
-    <!-- 主题内容 结束 -->
-    <!-- 公告内容 开始 -->
-  
-    <!-- 公告内容 结束 -->
-    <!-- 背景内容 开始 -->
-      <div class="bg-wrapper" :style="head_pic_url">
-      <!-- <img :src="poiInfo.head_pic_url" /> -->
+    <div class="content-wrapper">
+      <div class="icon" :style="head_bg">
+        <!--<img :src="poiInfo.pic_url" />-->
       </div>
-    <!-- 背景内容 结束 -->
-    <!-- 公告详情 开始 -->
+      <div class="name">
+        <h3>{{poiInfo.name}}</h3>
+      </div>
+      <div class="collect">
+        <img src="./img/star.png" />
+        <span>收藏</span>
+      </div>
+    </div>
+   <!-- 主题内容 结束 -->
+   <!-- 公告内容 开始 -->
+  
+   <!-- 公告内容 结束 -->
+   <!-- 背景内容 开始 -->
+    <div class="bg-wrapper" :style="head_pic_url">
+   <!-- <img :src="poiInfo.head_pic_url" /> -->
+    </div>
+   <!-- 背景内容 结束 -->
+   <!-- 公告详情 开始 -->
    
 
-    <!-- 公告详情 结束 -->
+   <!-- 公告详情 结束 -->
   </div>
 </template>
 
@@ -54,6 +63,9 @@ export default {
   computed:{
     head_pic_url(){
       return "background-image: url(" + this.poiInfo.head_pic_url + ");"
+    },
+    head_bg(){
+      return "background-image: url(" + this.poiInfo.pic_url + ");"
     }
   }
 }
@@ -168,4 +180,49 @@ export default {
     background-size: 100% 135%;
     background-position: center -12px;
 }
+/* 主题内容 样式 */ 
+.header .content-wrapper {
+  padding: 17px 10px 11px;
+  height: 50px;
+}
+
+.header .content-wrapper .icon {
+  width: 50px;
+  height: 50px;
+  background-size: 135% 100%;
+  background-position: center;
+  border-radius: 5px;
+  float: left;
+}
+
+.header .content-wrapper .name {
+  float: left;
+  padding: 18px 0 0 12px;
+}
+
+.header .content-wrapper .name h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.header .content-wrapper .collect {
+  width: 25px;
+  height: 37px;
+  float: right;
+  text-align: center;
+  padding-top: 6px;
+}
+
+.header .content-wrapper .collect img {
+  width: 20px;
+  height: 20px;
+}
+
+.header .content-wrapper .collect span {
+  margin-top: 7px;
+  color: white;
+  font-size: 11px;
+}
+
 </style>
