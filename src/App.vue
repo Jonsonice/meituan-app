@@ -9,9 +9,7 @@
     </div>
     
     <!-- 内容 -->
-    <div class="content">
-      内容  
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
