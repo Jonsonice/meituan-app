@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- 头部 -->
-    <app-header></app-header>
+    <app-header :poiInfo="poiInfo"></app-header>
     
     <!-- 导航 -->
     <div class="nav">
@@ -19,9 +19,27 @@ import Nav from './components/nav/Nav';
 
 export default {
     name: 'App',
+    data() {
+        return {
+            poiInfo: {}
+        };
+    },
     components: {
         'app-header': Header,
         'app-nav': Nav
+    },
+    created() {
+        fetch('/api/goods')
+            .then(res => {
+                return res.json();
+            })
+            .then(response => {
+                // console.log(response)
+                if (response.code == 0) {
+                    this.poiInfo = response.data.poi_info;
+                    // console.log(this.poiInfo);
+                }
+            });
     }
 };
 </script>
