@@ -4,7 +4,9 @@
     <div class="menu-wrapper" ref="menuScroll">
       <ul>
         <!-- 专场 -->
-        <li class="menu-item">
+        <li 
+        class="menu-item"
+        :class="{'current':currentIndex === 0}">
           <p class="text">
             <img class="icon" :src="container.tag_icon" v-if="container.tag_icon">
             {{container.tag_name}}
@@ -14,7 +16,7 @@
         <li 
             class="menu-item"
             v-for="(item,index) in goods" :key="index"
-            >
+            :class="{'current':currentIndex === index + 1}">
           <p class="text">
             <img class="icon" :src="item.icon" v-if="item.icon">
             {{item.name}}
@@ -95,7 +97,7 @@ export default {
       this.foodScroll.on("scroll",(pos) => {
         // console.log(pos.y)
       this.scrollY = Math.abs(Math.round(pos.y))
-        console.log(this.scrollY)
+        // console.log(this.scrollY)
       })
     },
     calculateHeight(){
@@ -127,17 +129,33 @@ export default {
             // DOM已经更新
             this.$nextTick(() => {
               // 执行滚动方法
-              this.initScroll()
+            this.initScroll()
 
-              // 计算分类的区间高度
-              this.calculateHeight()
-              // 监听滚动的位置
-              // 根据滚动位置确认下标,与左侧对应
-              // 通过下标实现点击左侧,滚动右侧
-            })
-          }
-      });
+            // 计算分类的区间高度
+            this.calculateHeight()
+            // 监听滚动的位置
+            // 根据滚动位置确认下标,与左侧对应
+            // 通过下标实现点击左侧,滚动右侧
+          })
+        }
+    });
+  },
+  computed:{
+    currentIndex(){
+      for(let i = 0; i < this.listHeight.length; i++){
+        // 获取商品区间的范围
+        let height1 = this.listHeight[i]
+        let height2 = this.listHeight[i+1]
+
+        // 是否在上述区间中
+        if(!height2 || (this.scrollY >= height1 && this.scrollY < height2)){
+          console.log(i)
+          return i;
+        }
+      }
+      return 0
     }
+  }
 }
 </script>
 
