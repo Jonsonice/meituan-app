@@ -1,7 +1,7 @@
 <template>
   <div class="goods">
     <!-- 分类列表 -->
-    <div class="menu-wrapper">
+    <div class="menu-wrapper" ref="menuScroll">
       <ul>
         <!-- 专场 -->
         <li class="menu-item">
@@ -24,7 +24,7 @@
       </ul>
     </div>
     <!-- 商品列表 -->
-    <div class="foods-wrapper">
+    <div class="foods-wrapper" ref="foodScroll">
       <ul>
         <!-- 专场 -->
         <li class="container-list">
@@ -67,6 +67,8 @@
 </template>
 
 <script>
+import BScroll from 'better-scroll'
+
 export default {
   data(){
     return{
@@ -78,6 +80,10 @@ export default {
   methods:{
     head_bg(imgName){
       return "background-image: url(" + imgName + ");"
+    },
+    initScroll(){
+      new BScroll(this.$refs.menuScroll)
+      new BScroll(this.$refs.foodScroll)
     }
   },
   created() {
@@ -91,6 +97,8 @@ export default {
             this.goods = response.data.food_spu_tags;
             // console.log(this.container);
             // console.log(this.goods);
+            // 执行滚动方法
+            this.initScroll()
           }
       });
     }
