@@ -27,7 +27,7 @@
     <div class="foods-wrapper" ref="foodScroll">
       <ul>
         <!-- 专场 -->
-        <li class="container-list">
+        <li class="container-list food-list-hook">
           <div 
             v-for="(item,index) in container.operation_source_list" 
             :key="index" 
@@ -36,7 +36,7 @@
           </div>
         </li>
         <!-- 具体分类 -->
-        <li v-for="(item,index) in goods" :key="index" class="food-list">
+        <li v-for="(item,index) in goods" :key="index" class="food-list food-list-hook">
           <h3 class="title">{{item.name}}</h3>
           <!-- 具体的商品列表 -->
           <ul>
@@ -73,7 +73,8 @@ export default {
   data(){
     return{
       container:{},
-      goods:[]
+      goods:[],
+      listHeight:[]
     }
   },
   // 计算属性是不能够接收参数的
@@ -84,7 +85,23 @@ export default {
     initScroll(){
       new BScroll(this.$refs.menuScroll)
       new BScroll(this.$refs.foodScroll)
-    }
+    },
+    calculateHeight(){
+      // 获取元素
+      let foodlist = this.$refs.foodScroll.getElementsByClassName("food-list-hook")
+      // console.log(foodlist)
+
+      let height = 0
+      this.listHeight.push(height)
+
+      for(let i = 0; i < foodlist.length; i++){
+        let item = foodlist[i]
+        // 累加
+        height += item.clientHeight
+        this.listHeight.push(height)
+      }
+      // console.log(this.listHeight)
+    },
   },
   created() {
     fetch('/api/goods')
@@ -95,10 +112,17 @@ export default {
           if (response.code == 0) {
             this.container = response.data.container_operation_source;
             this.goods = response.data.food_spu_tags;
-            // console.log(this.container);
-            // console.log(this.goods);
-            // 执行滚动方法
-            this.initScroll()
+            // DOM已经更新
+            this.$nextTick(() => {
+              // 执行滚动方法
+              this.initScroll()
+
+              // 计算分类的区间高度
+              this.calculateHeight()
+              // 监听滚动的位置
+              // 根据滚动位置确认下标,与左侧对应
+              // 通过下标实现点击左侧,滚动右侧
+            })
           }
       });
     }
