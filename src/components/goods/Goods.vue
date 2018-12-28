@@ -28,13 +28,38 @@
       <ul>
         <!-- 专场 -->
         <li class="container-list">
-          <div v-for="(item,index) in container.operation_source_list" :key="index">
+          <div 
+            v-for="(item,index) in container.operation_source_list" 
+            :key="index" 
+            class="food-item">
             <img :src="item.pic_url">
           </div>
         </li>
         <!-- 具体分类 -->
         <li v-for="(item,index) in goods" :key="index" class="food-list">
           <h3 class="title">{{item.name}}</h3>
+          <!-- 具体的商品列表 -->
+          <ul>
+            <li 
+              v-for="(food,index) in item.spus" 
+              :key="index"
+              class="food-item">
+              <div class="icon" :style="head_bg(food.picture)"></div>
+              <div class="content">
+                <h3 class="name">{{food.name}}</h3>
+                <p class="desc" v-if="food.description">{{food.description}}</p>
+                <div class="extra">
+                  <span class="saled">{{food.month_saled_content}}</span>
+                  <span class="praise">{{food.praise_content}}</span>
+                </div>
+                <img class="product" :src="food.product_label_picture" alt="">
+                <p class="price">
+                  <span class="text">${{food.min_price}}</span>
+                  <span class="unit">/{{food.unit}}</span>
+                </p>
+              </div>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
@@ -47,6 +72,12 @@ export default {
     return{
       container:{},
       goods:[]
+    }
+  },
+  // 计算属性是不能够接收参数的
+  methods:{
+    head_bg(imgName){
+      return "background-image: url(" + imgName + ");"
     }
   },
   created() {
@@ -84,7 +115,7 @@ export default {
 
 .goods .foods-wrapper{
   flex:1;
-  background: blue; 
+  /*background: blue; */
 }
 /* Menu item */ 
 .goods .menu-wrapper .menu-item{
@@ -109,4 +140,47 @@ export default {
   height: 15px;
   vertical-align: middle;
 }
+/* 专场样式 */ 
+.goods .foods-wrapper .container-list{
+  padding: 11px 11px 0 11px;
+  border-bottom: 1px solid #E4E4E4;
+}
+
+.goods .foods-wrapper .container-list img{
+  width: 100%;
+  margin-bottom: 11px;
+  border-radius: 5px;
+}
+/* 具体分类商品布局 */ 
+.goods .foods-wrapper .food-list{
+  padding: 11px;
+}
+
+.goods .foods-wrapper .food-list .title{
+  height: 13px;
+  font-size: 13px;
+  background: url(./img/btn_yellow_highlighted@2x.png) no-repeat left center;
+  background-size: 2px 10px;
+  padding-left: 7px;
+  margin-bottom: 12px;
+}
+
+.goods .foods-wrapper .food-list .food-item{
+  display: flex;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.goods .foods-wrapper .food-list .food-item  .icon{
+  flex: 0 0 63px;
+  background-position: center;
+  background-size: 120% 100%;background-repeat: no-repeat;
+  margin-right: 11px;
+  height: 75px;
+}
+
+.goods .foods-wrapper .food-list .food-item .content{
+  flex: 1;
+}
+
 </style>
