@@ -289,4 +289,33 @@ export default {
   font-size: 12px;
   color: #BFBFBF;
 }
+/* 当前选中 */ 
+.goods .menu-wrapper .menu-item.current{
+  background: white;
+  font-weight: bold;
+  margin-top: -1px;
+}
+.goods .menu-wrapper .menu-item:first-child.current{
+  margin-top: 1px;
+}
+
+.goods .foods-wrapper .food-list .food-item .cartcontrol-wrapper{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.goods .menu-wrapper .menu-item .num{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  color: white;
+  background: red;
+  text-align: center;
+  font-size: 7px;
+  line-height: 13px;
+}
 </style>
