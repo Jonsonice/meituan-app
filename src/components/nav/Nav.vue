@@ -33,5 +33,18 @@ export default {}
     color: #666;
     position: relative;
 }
-
+/* 选中样式 */
+.nav .active {
+    color: #ffbb22;
+}
+.nav .active .line{
+  width: 20px;
+  height: 2px;
+  display: inline-block;
+  background: #ffbb22;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  margin-left: -10px;
+}
 </style>
