@@ -38,7 +38,14 @@
     </div>
    <!-- 主题内容 结束 -->
    <!-- 公告内容 开始 -->
-  
+    <div class="bulletin-wrapper">
+      <img class="icon" v-if="poiInfo.discounts2" :src="poiInfo.discounts2[0].icon_url" />
+      <span class="text" v-if="poiInfo.discounts2">{{poiInfo.discounts2[0].info}}</span>
+      <div class="detail" v-if="poiInfo.discounts2">
+        {{poiInfo.discounts2.length}}个活动
+        <span class="icon-keyboard_arrow_right"></span>
+      </div>
+    </div>
    <!-- 公告内容 结束 -->
    <!-- 背景内容 开始 -->
     <div class="bg-wrapper" :style="head_pic_url">
@@ -224,5 +231,36 @@ export default {
   color: white;
   font-size: 11px;
 }
+/* 公告内容样式 */
+.header .bulletin-wrapper {
+  height: 16px;
+  padding: 0 10px;
+}
 
+.header .bulletin-wrapper .icon {
+  width: 16px;
+  height: 16px;
+  float: left;
+  margin-right: 6px;
+}
+
+.header .bulletin-wrapper .text {
+  font-size: 11px;
+  color: white;
+  float: left;
+  line-height: 16px;
+}
+
+.header .bulletin-wrapper .detail {
+  color: white;
+  float: right;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.header .bulletin-wrapper .detail span {
+  font-size: 16px;
+  line-height: 16px;
+  float: right;
+}
 </style>
