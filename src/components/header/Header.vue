@@ -32,7 +32,9 @@
   
     <!-- 公告内容 结束 -->
     <!-- 背景内容 开始 -->
-
+      <div class="bg-wrapper" :style="head_pic_url">
+      <!-- <img :src="poiInfo.head_pic_url" /> -->
+      </div>
     <!-- 背景内容 结束 -->
     <!-- 公告详情 开始 -->
    
@@ -47,6 +49,11 @@ export default {
     poiInfo:{
       type:Object,
       default:{}
+    }
+  },
+  computed:{
+    head_pic_url(){
+      return "background-image: url(" + this.poiInfo.head_pic_url + ");"
     }
   }
 }
@@ -84,7 +91,7 @@ export default {
 .header .top-wrapper .search-wrapper {
   width: 100%;
   height: 31px;
-   background: pink; 
+   /*background: pink; */
   padding: 0 104px 0 50px;
   /* 设置盒子从边框开始计算*/
   box-sizing: border-box;
@@ -149,5 +156,16 @@ export default {
   display: block;
   float: left;
   margin-right: 1px;
+}
+/* 背景图片样式 */ 
+.header .bg-wrapper {
+    width: 100%;
+    height: 150px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background-size: 100% 135%;
+    background-position: center -12px;
 }
 </style>
