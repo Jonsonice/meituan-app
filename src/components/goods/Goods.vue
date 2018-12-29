@@ -23,7 +23,9 @@
             <img class="icon" :src="item.icon" v-if="item.icon">
             {{item.name}}
           </p>
-          
+          <i class="num" v-show="calculateCount(item.spus)">
+            {{calculateCount(item.spus)}}
+          </i>
         </li>
       </ul>
     </div>
@@ -133,6 +135,15 @@ export default {
       // console.log(element)
       // 滚动到对应元素的位置
       this.foodScroll.scrollToElement(element,250)
+    },
+    calculateCount(spus){
+      let count = 0
+      spus.forEach((food) => {
+        if(food.count > 0){
+          count += food.count
+        }
+      })
+      return count
     }
   },
   created() {
@@ -341,7 +352,7 @@ export default {
   right: 0;
   bottom: 0;
 }
-
+/*数字标样式*/
 .goods .menu-wrapper .menu-item .num{
   position: absolute;
   right: 5px;
