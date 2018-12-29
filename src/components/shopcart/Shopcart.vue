@@ -34,7 +34,7 @@
       </div>
       <div class="list-header">
         <h3 class="title">1号口袋</h3>
-        <div class="empty">
+        <div class="empty" @click="clearAll">
           <img src="./img/ash_bin.png" />
           <span>清空购物车</span>
         </div>
@@ -145,13 +145,11 @@
 
         this.fold = !this.fold
       },
+      // 清除购物车
       clearAll(){
         this.selectFoods.forEach((food) => {
           food.count = 0
         })
-      },
-      hideMask(){
-        this.fold = true
       }
     },
     components:{
