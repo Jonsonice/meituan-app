@@ -67,11 +67,14 @@
         </li>
       </ul>
     </div>
+    <!-- 购物车 -->
+    <app-shopcart></app-shopcart>
   </div>
 </template>
 
 <script>
 import BScroll from 'better-scroll'
+import Shopcart from '../shopcart/Shopcart'
 
 export default {
   data(){
@@ -165,6 +168,9 @@ export default {
       }
       return 0
     }
+  },
+  components:{
+    "app-shopcart":Shopcart
   }
 }
 </script>
