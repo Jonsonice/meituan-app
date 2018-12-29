@@ -4,8 +4,12 @@
     <div class="content-left">
       <div class="logo-wrapper">
         <span class="icon-shopping_cart logo"></span>
+        <i class="num" v-show="totalCount">{{totalCount}}</i>
       </div>
       <div class="desc-wrapper">
+        <p class="total-price" v-show="totalPrice">
+          ￥{{totalPrice}}
+        </p>
         <p class="tip">另需{{poiInfo.shipping_fee_tip}}</p>
       </div>
     </div>
@@ -24,6 +28,30 @@
       poiInfo:{
         type:Object,
         default:{}
+      },
+      selectFoods:{
+        type:Array,
+        default(){
+          return [
+
+          ]
+        }
+      }
+    },
+    computed:{
+      totalCount(){
+        let num = 0
+        this.selectFoods.forEach((food) => {
+          num += food.count
+        })
+        return num
+      },
+      totalPrice(){
+        let total = 0
+        this.selectFoods.forEach((food) => {
+          total += food.min_price * food.count
+        })
+        return total
       }
     }
   }

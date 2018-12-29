@@ -71,7 +71,7 @@
       </ul>
     </div>
     <!-- 购物车 -->
-    <app-shopcart :poiInfo="poiInfo"></app-shopcart>
+    <app-shopcart :poiInfo="poiInfo" :selectFoods="selectFoods"></app-shopcart>
   </div>
 </template>
 
@@ -174,6 +174,17 @@ export default {
         }
       }
       return 0
+    },
+    selectFoods(){
+      let foods = []
+      this.goods.forEach((myfoods) => {
+        myfoods.spus.forEach((food) => {
+          if(food.count > 0){
+            foods.push(food)
+          }
+        })
+      })
+      return foods
     }
   },
   components:{
