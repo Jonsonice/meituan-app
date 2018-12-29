@@ -23,10 +23,50 @@
     <div class="content-right" :class="{'highligh':totalCount>0}">
       {{payStr}}
     </div>
+    <!-- 购物车列表 -->
+    <div class="shopcart-list">
+      <div class="list-top" v-if="poiInfo.discounts2">
+        {{poiInfo.discounts2[0].info}}
+      </div>
+      <div class="list-header">
+        <h3 class="title">1号口袋</h3>
+        <div class="empty">
+          <img src="./img/ash_bin.png" />
+          <span>清空购物车</span>
+        </div>
+      </div>
+      <div class="list-content">
+        <ul>
+          <li 
+            class="food-item"
+            v-for="(food,index) in selectFoods"
+            :key="index"
+            >
+            <div class="desc-wrapper">
+              <div class="desc-left">
+                <p class="name">{{food.name}}</p>
+                <p class="unit" v-show="!food.description">{{food.unit}}</p>
+                <p class="description" v-show="!food.unit">{{food.description}}</p>
+              </div>
+              <div class="desc-right">
+                ￥{{food.min_price}}
+              </div>
+            </div>
+            <div class="cartcontrol-wrapper">
+              <app-cart-control :food="food"></app-cart-control>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="list-bottom">
+        
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+  import CartControl from '../cartcontrol/CartControl'
   export default {
     props:{
       poiInfo:{
@@ -64,6 +104,9 @@
           return this.poiInfo.min_price_tip
         }
       }
+    },
+    components:{
+      "app-cart-control":CartControl
     }
   }
 </script>
