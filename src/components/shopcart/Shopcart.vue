@@ -6,22 +6,27 @@
         <span class="icon-shopping_cart logo"></span>
       </div>
       <div class="desc-wrapper">
-        <p class="tip">另需配送费用</p>
+        <p class="tip">另需{{poiInfo.shipping_fee_tip}}</p>
       </div>
     </div>
     <!-- 底部右侧 -->
     <div class="content-right">
       <div class="content-right">
-        $0元起送
+        {{poiInfo.min_price_tip}}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-
-}
+  export default {
+    props:{
+      poiInfo:{
+        type:Object,
+        default:{}
+      }
+    }
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

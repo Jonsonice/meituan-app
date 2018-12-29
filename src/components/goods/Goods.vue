@@ -68,7 +68,7 @@
       </ul>
     </div>
     <!-- 购物车 -->
-    <app-shopcart></app-shopcart>
+    <app-shopcart :poiInfo="poiInfo"></app-shopcart>
   </div>
 </template>
 
@@ -81,6 +81,7 @@ export default {
     return{
       container:{},
       goods:[],
+      poiInfo:{},
       listHeight:[],
       menuScroll:{},
       foodScroll:{},
@@ -137,8 +138,10 @@ export default {
       })
       .then(response => {
           if (response.code == 0) {
-            this.container = response.data.container_operation_source;
-            this.goods = response.data.food_spu_tags;
+            this.container = response.data.container_operation_source
+            this.goods = response.data.food_spu_tags
+            this.poiInfo = response.data.poi_info
+            // console.log(this.poiInfo);
             // DOM已经更新
             this.$nextTick(() => {
               // 执行滚动方法
