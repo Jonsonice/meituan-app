@@ -62,6 +62,9 @@
                   <span class="unit">/{{food.unit}}</span>
                 </p>
               </div>
+              <div class="cartcontrol-wrapper">
+                <app-cart-control></app-cart-control>
+              </div>
             </li>
           </ul>
         </li>
@@ -75,6 +78,7 @@
 <script>
 import BScroll from 'better-scroll'
 import Shopcart from '../shopcart/Shopcart'
+import CartControl from '../cartcontrol/CartControl'
 
 export default {
   data(){
@@ -173,7 +177,8 @@ export default {
     }
   },
   components:{
-    "app-shopcart":Shopcart
+    "app-shopcart":Shopcart,
+    "app-cart-control":CartControl
   }
 }
 </script>
@@ -249,6 +254,7 @@ export default {
 .goods .foods-wrapper .food-list .food-item{
   display: flex;
   margin-bottom: 25px;
+  /*添加加减号定位*/
   position: relative;
 }
 
@@ -318,6 +324,7 @@ export default {
   margin-top: 1px;
 }
 
+/*定位到右下角*/
 .goods .foods-wrapper .food-list .food-item .cartcontrol-wrapper{
   position: absolute;
   right: 0;
