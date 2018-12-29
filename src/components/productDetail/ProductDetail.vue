@@ -32,6 +32,8 @@
               </div>
           </div>
         </div>
+        <Split></Split>
+
       </div>
     </div>
   </transition>
@@ -41,6 +43,8 @@
   import Vue from 'vue'
   import BScroll from 'better-scroll'
   import CartControl from '../cartcontrol/CartControl'
+  import Split from '../split/Split'
+
   export default {
     data(){
       return {
@@ -75,7 +79,8 @@
       }
     },
     components:{
-      CartControl
+      CartControl,
+      Split
     }
   }
 </script>
