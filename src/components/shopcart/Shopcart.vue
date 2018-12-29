@@ -120,4 +120,35 @@
   color: #bab9b9;
   line-height: 51px;
 }
+.shopcart-wrapper .content-left .logo-wrapper.highligh{
+  background: #ffd161;
+}
+.shopcart-wrapper .content-left .logo-wrapper .logo.highligh{
+  color: #2D2B2A;
+}
+.shopcart-wrapper .content-left .logo-wrapper .num{
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  border-radius: 50%;
+  font-size: 9px;
+  color: white;
+  background: red;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.shopcart-wrapper .content-left .desc-wrapper .tip.highligh{
+  line-height: 12px;
+}
+
+.shopcart-wrapper .content-right.highligh{
+  background: #FFD161;
+  color: #2D2B2A;
+}
+.shopcart-wrapper .content-left .desc-wrapper .total-price {
+    font-size: 18px;
+    line-height: 33px;
+    color: white;
+}
 </style>
