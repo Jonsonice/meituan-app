@@ -7,7 +7,8 @@
         :class="{'highligh':totalCount>0}">
         <span 
           class="icon-shopping_cart logo" 
-          :class="{'highligh':totalCount>0}"></span>
+          :class="{'highligh':totalCount>0}"
+          @click="toggleList"></span>
         <i class="num" v-show="totalCount">{{totalCount}}</i>
       </div>
       <div class="desc-wrapper">
@@ -24,7 +25,10 @@
       {{payStr}}
     </div>
     <!-- 购物车列表 -->
-    <div class="shopcart-list">
+    <div 
+      class="shopcart-list"
+      v-show="listShow"
+      :class="{'show':listShow}">
       <div class="list-top" v-if="poiInfo.discounts2">
         {{poiInfo.discounts2[0].info}}
       </div>
@@ -68,6 +72,11 @@
 <script>
   import CartControl from '../cartcontrol/CartControl'
   export default {
+    data(){
+      return {
+        fold:true
+      }
+    },
     props:{
       poiInfo:{
         type:Object,
@@ -103,6 +112,45 @@
         }else{
           return this.poiInfo.min_price_tip
         }
+      },
+      listShow(){
+        if(!this.totalCount){
+          this.fold = true
+          return false
+        }
+        let show = !this.fold
+
+        if(show){
+          this.$nextTick(() => {
+            if(!this.shopScroll){
+              this.shopScroll = new BScroll(this.$refs.listContent,{
+                click:true
+              })
+            }else{
+              this.shopScroll.refresh()
+            }
+          })
+        }
+
+        return show
+      }
+    },
+    methods:{
+      toggleList(){
+        // 判断购物车个数是否为空
+        if(!this.totalCount){
+          return;
+        }
+
+        this.fold = !this.fold
+      },
+      clearAll(){
+        this.selectFoods.forEach((food) => {
+          food.count = 0
+        })
+      },
+      hideMask(){
+        this.fold = true
       }
     },
     components:{
@@ -194,4 +242,5 @@
     line-height: 33px;
     color: white;
 }
+
 </style>
