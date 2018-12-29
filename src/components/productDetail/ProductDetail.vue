@@ -1,6 +1,6 @@
 <template>
   <transition name="food-detail">
-    <div class="food" v-show="showFlag">
+    <div class="food" ref="foodView" v-show="showFlag">
       <div class="food-wrapper">
         <div class="food-content">
           <div class="img-wrapper">
@@ -38,7 +38,8 @@
 </template>
 
 <script>
-  import Vue from 'vue';
+  import Vue from 'vue'
+  import BScroll from 'better-scroll'
   import CartControl from '../cartcontrol/CartControl'
   export default {
     data(){
@@ -54,6 +55,16 @@
     methods:{
       showView(){
         this.showFlag = true
+
+        this.$nextTick(() => {
+          if(!this.scroll){
+            this.scroll = new BScroll(this.$refs.foodView,{
+              click:true
+            })
+          }else{
+            this.scroll.refresh()
+          }
+        })
       },
       closeView(){
         this.showFlag = false
