@@ -26,6 +26,7 @@
               </div>
               <div 
                 class="buy" 
+                @click="addProduct"
                 v-show="!food.count || food.count == 0">
                 选规格
               </div>
@@ -37,6 +38,7 @@
 </template>
 
 <script>
+  import Vue from 'vue';
   import CartControl from '../cartcontrol/CartControl'
   export default {
     data(){
@@ -56,6 +58,10 @@
       closeView(){
         this.showFlag = false
       },
+      addProduct(){
+        // this.food.count = 1
+        Vue.set(this.food,"count",1)
+      }
     },
     components:{
       CartControl
