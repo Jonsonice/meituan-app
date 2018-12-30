@@ -22,9 +22,12 @@ const express = require("express")
 const app = express()
 
 //引入数据
-var goods = require("../data/goods.json")
-var ratings = require("../data/ratings.json")
-var seller = require("../data/seller.json")
+let goods = require("../data/goods.json")
+this.seller = goods.seller
+let ratings = require("../data/ratings.json")
+this.seller = ratings.seller
+let seller = require("../data/seller.json")
+this.seller = seller.seller
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
