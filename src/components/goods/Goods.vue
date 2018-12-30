@@ -59,7 +59,7 @@
                   <span class="saled">{{food.month_saled_content}}</span>
                   <span class="praise">{{food.praise_content}}</span>
                 </div>
-                <img class="product" :src="food.product_label_picture" alt="">
+                <img class="product" :src="food.product_label_picture" v-if="food.product_label_picture">
                 <p class="price">
                   <span class="text">${{food.min_price}}</span>
                   <span class="unit">/{{food.unit}}</span>
@@ -105,7 +105,9 @@ export default {
       return "background-image: url(" + imgName + ");"
     },
     initScroll(){
-      this.menuScroll = new BScroll(this.$refs.menuScroll)
+      this.menuScroll = new BScroll(this.$refs.menuScroll,{
+        click:true
+      })
       this.foodScroll = new BScroll(this.$refs.foodScroll,{
         probeType:3,
         click:true
