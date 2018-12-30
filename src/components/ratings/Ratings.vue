@@ -316,4 +316,79 @@
   .ratings .ratings-wrapper .content .labels-view .item.highligh {
     color: #656565;
   }
+  .ratings .ratings-wrapper .content .rating-list .comment-item {
+  padding: 16px 16px 16px 0;
+  border-bottom: 1px solid #F4F4F4;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.ratings .ratings-wrapper .content .rating-list .comment-item .comment-header {
+  flex: 0 0 35px;
+  margin-right: 11px;
+}
+
+.ratings .ratings-wrapper .content .rating-list .comment-item .comment-header img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.ratings .ratings-wrapper .content .rating-list .comment-item .comment-main {
+  flex: 1;
+}
+
+.ratings .ratings-wrapper .content .rating-list .comment-item .comment-main .user {
+  width: 50%;
+  float: left;
+  font-size: 11px;
+  color: #333333;
+}
+
+.ratings .ratings-wrapper .content .rating-list .comment-item .comment-main .time {
+  width: 50%;
+  float: right;
+  text-align: right;
+  font-size: 9px;
+  color: #666666;
+}
+
+.ratings .ratings-wrapper .content .rating-list .comment-item .comment-main .star-wrapper {
+  float: left;
+  margin-top: 12px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.ratings .ratings-wrapper .content .rating-list .comment-item .comment-main .star-wrapper .text {
+  color: #999999;
+  font-size: 11px;
+  float: left;
+}
+
+.ratings .ratings-wrapper .content .rating-list .comment-item .comment-main .star-wrapper .star {
+  float: left;
+  margin-left: 7px;
+}
+
+.ratings .ratings-wrapper .content .rating-list .comment-item .comment-main .c_content {
+  font-size: 13px;
+  line-height: 19px;
+  float: left;
+  width: 100%;
+}
+
+.ratings .ratings-wrapper .content .rating-list .comment-item .comment-main .c_content i {
+  color: #576b95;
+}
+
+.ratings .ratings-wrapper .content .rating-list .comment-item .comment-main .img-wrapper {
+  margin-top: 9px;
+  float: left;
+}
+
+.ratings .ratings-wrapper .content .rating-list .comment-item .comment-main .img-wrapper img {
+  width: 175px;
+}
 </style>
