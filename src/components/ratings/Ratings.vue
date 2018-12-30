@@ -1,37 +1,74 @@
 <template>
   <div class="ratings">
-	 <div class="ratings-wrapper">
-      <div class="overview">
-        <div class="overview-left">
-          <div class="comment-score">
-            <p class="score">{{ratings.comment_score}}</p>
-            <p class="text">商家评分</p>
-          </div>
-          <div class="other-score">
-            <div class="quality-score item">
-              <span class="text">口味</span>
-              <Star :score="ratings.quality_score" class='star'></Star>
-              <span class="score"></span>
+  	<div class="ratings-wrapper">
+        <div class="overview">
+          <div class="overview-left">
+            <div class="comment-score">
+              <p class="score">{{ratings.comment_score}}</p>
+              <p class="text">商家评分</p>
             </div>
-            <div class="pack-score item">
-              <span class="text">包装</span>
-              <Star :score="ratings.pack_score" class='star'></Star>
-              <span class="score"></span>
+            <div class="other-score">
+              <div class="quality-score item">
+                <span class="text">口味</span>
+                <Star :score="ratings.quality_score" class='star'></Star>
+                <span class="score"></span>
+              </div>
+              <div class="pack-score item">
+                <span class="text">包装</span>
+                <Star :score="ratings.pack_score" class='star'></Star>
+                <span class="score"></span>
+              </div>
+            </div>
+          </div>
+          <div class="overview-right">
+            <div class="delivery-score">
+              <p class="score">{{ratings.delivery_score}}</p>
+              <p class="text">配送评分</p>
             </div>
           </div>
         </div>
-        <div class="overview-right">
-          <div class="delivery-score">
-            <p class="score">{{ratings.delivery_score}}</p>
-            <p class="text">配送评分</p>
-          </div>
+
+        <Split></Split>
+
+      <div class="content">
+        <div class="rating-select" v-if="ratings.tab">
+          <span 
+            class="item" 
+            :class="{'active':selectType==2}"
+            @click="selectTypeFn(2)">
+            {{ratings.tab[0].comment_score_title}}
+          </span>
+          <span 
+            class="item" 
+            :class="{'active':selectType==1}"
+            @click="selectTypeFn(1)">
+            {{ratings.tab[1].comment_score_title}}
+          </span>
+          <span 
+            class="item" 
+            :class="{'active':selectType==0}"
+            @click="selectTypeFn(0)">
+            <img v-show="selectType != 0" src="./img/icon_sub_tab_dp_normal@2x.png"/>
+            <img v-show="selectType == 0" src="./img/icon_sub_tab_dp_highlighted@2x.png"/>
+            {{ratings.tab[2].comment_score_title}}
+          </span>
         </div>
+
+        <div class="labels-view">
+          <span
+            class="item" 
+            v-for="(item,index) in ratings.labels" 
+            :key="index"
+            :class="{'heigligh':item.label_star>0}"
+            >
+            {{item.content}}{{item.label_count}}
+          </span>
+        </div>
+
+        <ul class="rating-list">
+
+        </ul>
       </div>
-    </div>
-    <Split></Split>
-
-    <div class="content">
-
     </div>
   </div>
 </template>
@@ -40,10 +77,15 @@
   import Split from '../split/Split'
   import Star from '../star/Star'
 
+  const ALL = 2
+  const PICTURE = 1
+  const COMMENT = 0
+
   export default {
     data(){
       return {
-        ratings:{}
+        ratings:{},
+        selectType:ALL
       }
     },
     components:{
@@ -58,19 +100,15 @@
         .then(response =>{
           if(response.code == 0){
             this.ratings = response.data
-            console.log(this.ratings);
-          //   this.$nextTick(()=>{
-          //     if(!this.scroll){
-          //       this.scroll = new BScroll(this.$refs.ratingView,{
-          //         click:true
-          //       })
-          //     }else{
-          //       this.scroll.refresh()
-          //     }
-          //   })
+            // console.log(this.ratings);
           }
         })  
+    },
+    methods:{
+      selectTypeFn(type){
+        this.selectType = type
       }
+    }
 
   }
 </script>
@@ -166,5 +204,64 @@
   .ratings .ratings-wrapper .overview .overview-right .delivery-score .text {
     font-size: 11px;
     color: #999999;
+  }
+  /*有图点评区样式*/
+  
+  .ratings .ratings-wrapper .content {
+    padding: 16px;
+  }
+  
+  .ratings .ratings-wrapper .content .rating-select {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0;
+    border: 1px solid #FFB000;
+    border-right: 0;
+    margin-bottom: 11px;
+    border-radius: 3px;
+  }
+  
+  .ratings .ratings-wrapper .content .rating-select .item {
+    width: 33.3%;
+    display: inline-block;
+    height: 33px;
+    line-height: 33px;
+    font-size: 14px;
+    text-align: center;
+    border-right: 1px solid #FFB000;
+    box-sizing: border-box;
+    color: #FFB000;
+  }
+
+  
+  .ratings .ratings-wrapper .content .rating-select .item:last-child img {
+    height: 14px;
+    vertical-align: middle;
+  }
+  
+  .ratings .ratings-wrapper .content .rating-select .item.active {
+    background: #FFB000;
+    color: black;
+  }
+  
+  .ratings .ratings-wrapper .content .labels-view {
+    /*margin-bottom: 14px;*/
+  }
+  
+  .ratings .ratings-wrapper .content .labels-view .item {
+    display: inline-block;
+    height: 27px;
+    line-height: 27px;
+    padding: 0 10px;
+    font-size: 12px;
+    background: #F4F4F4;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    border-radius: 3px;
+    color: #999999;
+  }
+  
+  .ratings .ratings-wrapper .content .labels-view .item.highligh {
+    color: #656565;
   }
 </style>
