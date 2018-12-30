@@ -107,7 +107,8 @@ export default {
     initScroll(){
       this.menuScroll = new BScroll(this.$refs.menuScroll)
       this.foodScroll = new BScroll(this.$refs.foodScroll,{
-        probeType:3
+        probeType:3,
+        click:true
       })
 
       // foodScroll 监听事件
