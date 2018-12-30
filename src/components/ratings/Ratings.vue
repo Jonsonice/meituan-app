@@ -1,5 +1,5 @@
 <template>
-  <div class="ratings">
+  <div class="ratings"  ref="ratingView">
   	<div class="ratings-wrapper">
         <div class="overview">
           <div class="overview-left">
@@ -66,7 +66,31 @@
         </div>
 
         <ul class="rating-list">
-
+          <li 
+              v-for="(comment,index) in selectComments" 
+              :key="index"
+              class="comment-item"
+              >
+              <div class="comment-header">
+                <img :src="comment.user_pic_url" v-if="comment.user_pic_url" />
+                <img src="./img/anonymity.png" v-if="!comment.user_pic_url"  />
+              </div>
+              <div class="comment-main">
+                <div class="user">
+                  {{comment.user_name}}
+                </div>
+                <div class="time">
+                  {{comment.comment_time}}
+                </div>
+                <div class="star-wrapper">
+                  <span class="text">评分</span>
+                  <Star :score="comment.order_comment_score" class="star"></Star>
+                </div>
+                <div class="content">
+                  {{comment.comment}}
+                </div>
+              </div>
+            </li>
         </ul>
       </div>
     </div>
@@ -74,6 +98,7 @@
 </template>
 
 <script>
+  import BScroll from 'better-scroll'
   import Split from '../split/Split'
   import Star from '../star/Star'
 
@@ -101,12 +126,39 @@
           if(response.code == 0){
             this.ratings = response.data
             // console.log(this.ratings);
-          }
-        })  
+            this.$nextTick(()=>{
+            if(!this.scroll){
+              this.scroll = new BScroll(this.$refs.ratingView,{
+                click:true
+              })
+            }else{
+              this.scroll.refresh()
+            }
+          })
+        }
+      })
     },
     methods:{
       selectTypeFn(type){
         this.selectType = type
+      }
+    },
+    computed:{
+      selectComments(){
+        if(this.selectType == ALL){
+          return this.ratings.comments
+        }else if(this.selectType == PICTURE){
+          let arr = []
+
+          this.ratings.comments.forEach(comment => {
+            if(comment.comment_pics.length){
+              arr.push(comment)
+            }
+          });
+          return arr
+        }else{
+          return this.ratings.comments_dp.comments
+        }
       }
     }
 
@@ -206,7 +258,7 @@
     color: #999999;
   }
   /*有图点评区样式*/
-  
+
   .ratings .ratings-wrapper .content {
     padding: 16px;
   }
