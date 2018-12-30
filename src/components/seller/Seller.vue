@@ -1,17 +1,18 @@
 <template>
-  <div class="seller">
+  <div class="seller" ref="sellerView">
 	 <div class="seller-wrapper">
      <Split></Split>
      <div class="seller-view">
+      <div class="address-wrapper">
        <div class="address-left">
           {{seller.address}}
         </div>
         <div class="address-right">
           <div class="content"></div>
         </div>
-
-        <div class="pics-wrapper">
-          <ul class="pics-list">
+      </div>
+        <div class="pics-wrapper" v-if="seller.poi_env" ref="picsView">
+          <ul class="pics-list" ref="picsList">
             <li
               ref="picsItem" 
               class="pics-item"
@@ -74,6 +75,8 @@
 
 <script>
   import Split from '../split/Split'
+  import BScroll from 'better-scroll'
+  
   export default {
     data(){
       return {
@@ -88,7 +91,22 @@
         .then(response =>{
           if(response.code == 0){
             this.seller = response.data
-            console.log(this.seller);
+            // console.log(this.seller);
+            this.$nextTick(() => {
+            if(this.seller.poi_env.thumbnails_url_list){
+              let imgW = this.$refs.picsItem[0].clientWidth
+              let marginR = 11
+              let width = (imgW + marginR) * this.seller.poi_env.thumbnails_url_list.length
+
+              this.$refs.picsList.style.width = width + "px"
+
+              this.scroll = new BScroll(this.$refs.picsView,{
+                scrollX:true
+              })
+            }
+
+            this.sellerView = new BScroll(this.$refs.sellerView)
+          })
         }
       })
     },
