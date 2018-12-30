@@ -2,12 +2,8 @@
   <div id="app">
     <!-- 头部 -->
     <app-header :poiInfo="poiInfo"></app-header>
-    
-    <!-- 导航 -->
-    <div class="nav">
-      <app-nav></app-nav>
-    </div>
-    
+    <!-- navigation -->
+    <app-nav :commentNum="commentNum"></app-nav>
     <!-- 内容 -->
     <router-view></router-view>
   </div>
@@ -21,7 +17,8 @@ export default {
     name: 'App',
     data() {
         return {
-            poiInfo: {}
+            poiInfo: {},
+            commentNum:0
         };
     },
     components: {
@@ -40,6 +37,17 @@ export default {
                     // console.log(this.poiInfo);
                 }
             });
+
+        // 请求ratings
+        fetch("/api/ratings")
+          .then(res => {
+            return res.json()
+          })
+          .then(response =>{
+            if(response.code == 0){
+              this.commentNum = response.data.comment_num
+            }
+          })
     }
 };
 </script>
